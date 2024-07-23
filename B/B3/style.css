@@ -1,0 +1,39 @@
+/**
+Your Code
+ */
+
+.photos {
+    counter-set: counter123 -1;
+}
+
+.photos > .photo-item:nth-child(n + 9) {
+    border: 1px solid red;
+    counter-increment: counter123 1;
+    position: absolute;
+    opacity: 0;
+}
+
+.photos > .photo-item:last-child {
+    position: relative;
+    opacity: 1;
+}
+
+.photos > .photo-item:last-child:after {
+    content: '+ ' counter(counter123, decimal);
+    background-color: rgba(42, 42, 42, 0.74);
+    color: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photos > .photo-item:nth-child(-n + 9):after {
+    border: 1px solid red;
+    content: '';
+    background-color: unset;
+}
