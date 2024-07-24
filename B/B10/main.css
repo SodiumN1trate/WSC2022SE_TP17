@@ -1,0 +1,17 @@
+.stars {
+    background-image: url("stars.png");
+    width: 750px;
+    height: 150px;
+}
+
+.stars {
+    display: flex;
+}
+
+.stars > div {
+    width: 75px;
+}
+
+.stars > div:hover {
+    background-color: gold;
+}
