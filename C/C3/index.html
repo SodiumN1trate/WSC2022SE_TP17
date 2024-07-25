@@ -8,11 +8,24 @@
 
 <script>
     function getType(value) {
-        if(Array.isArray(value)) {
-            return 'array';
+        // console.log(value[0])
+        try {
+            if(value.test(123)) {
+                return 'regexp'
+            }
+            return 'regexp'
+        } catch {
+            if(value === undefined) {
+                return 'undefined'
+            }
+            if(!value) {
+                return 'null'
+            }
+            if(Array.isArray(value)) {
+                return 'array'
+            }
+            return typeof value;
         }
-
-        return typeof value;
     }
 </script>
 
