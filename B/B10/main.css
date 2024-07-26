@@ -1,5 +1,11 @@
 .stars {
-    background-image: url("stars.png");
+    mask-image: url("stars.png");
+    width: 750px;
+    height: 150px;
+}
+
+.mask {
+    background-image: url("Untitled.png");
     width: 750px;
     height: 150px;
 }

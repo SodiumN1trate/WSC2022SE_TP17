@@ -16,7 +16,6 @@ const hexToRgb = (hex) => {
 const rgbToHex = (rgb) => {
     let numbers = rgb.match(/\d+/g)
     return `#${parseInt(numbers[0]).toString(16).padStart(2, '0')}${parseInt(numbers[1]).toString(16).padStart(2, '0')}${parseInt(numbers[2]).toString(16).padStart(2, '0')}`
-
 }
 
 const showError = () => {
@@ -28,8 +27,6 @@ const hideError = () => {
     document.getElementById('result-control').style.display = 'block'
     document.querySelector('.error-result').style.display = 'none'
 }
-
-
 input.addEventListener('input', (e) => {
     const value = e.target.value
     if(value.length === 7 && value.includes('#')) {

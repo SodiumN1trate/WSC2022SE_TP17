@@ -3,8 +3,7 @@
     width: 100px;
     height: 100px;
     transform-style: preserve-3d;
-    animation: rotate 1s linear forwards infinite;
-    counter-set: x-angle 90 y-angle 0 z-angle 0;
+    animation: rotate 3s infinite;
 }
 
 .face {
@@ -72,16 +71,11 @@
 }
 
 @keyframes rotate {
-    0% {
-        transform: rotate3d(1, 0, 0, counter(x-angle, decimal)deg);
-        counter-increment: x-angle 90;
-    }
-    50% {
-        transform: rotate3d(1, 0, 0, counter(x-angle)deg);
-        counter-increment: x-angle 90;
-    }
-    100% {
-        transform: rotate3d(1, 0, 0, counter(x-angle)deg);
-        counter-increment: x-angle 90;
-    }
+    0%   { transform: rotate3d(1, 1, 1, 0deg); }
+    16%  { transform: rotate3d(1, 1, 1, 90deg); }
+    33%  { transform: rotate3d(1, 1, 1, 180deg); }
+    50%  { transform: rotate3d(1, 1, 1, 270deg); }
+    66%  { transform: rotate3d(1, 1, 1, 360deg); }
+    83%  { transform: rotate3d(1, 1, 1, 450deg); }
+    100% { transform: rotate3d(1, 1, 1, 540deg); }
 }
