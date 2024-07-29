@@ -23,8 +23,8 @@
                 Integer tempus fermentum ultrices. Mauris rutrum enim sed neque interdum, in semper velit eleifend.
                 Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
             <div class="float-right">
-                <button class="btn btn-light"><i class="far fa-thumbs-up"></i></button>
-                <button class="btn btn-light"><i class="far fa-thumbs-down"></i></button>
+                <button class="btn btn-light" onclick="like('comment-1', true)"><i class="far fa-thumbs-up"></i></button>
+                <button class="btn btn-light" onclick="like('comment-1', false)"><i class="far fa-thumbs-down"></i></button>
             </div>
         </div>
 
@@ -35,8 +35,8 @@
                 mauris porta, gravida nulla vitae, sollicitudin lorem. Curabitur sed vestibulum lectus. In eu ipsum
                 purus.</p>
             <div class="float-right">
-                <button class="btn btn-light"><i class="far fa-thumbs-up"></i></button>
-                <button class="btn btn-light"><i class="far fa-thumbs-down"></i></button>
+                <button class="btn btn-light" onclick="like('comment-2', true)"><i class="far fa-thumbs-up"></i></button>
+                <button class="btn btn-light" onclick="like('comment-2', false)"><i class="far fa-thumbs-down"></i></button>
             </div>
         </div>
 
@@ -47,8 +47,8 @@
                 finibus nunc. Praesent convallis, eros non posuere aliquet, leo risus facilisis turpis, et pretium erat
                 nibh quis sapien. Vestibulum erat magna, commodo vitae bibendum quis, ornare id lorem.</p>
             <div class="float-right">
-                <button class="btn btn-light"><i class="far fa-thumbs-up"></i></button>
-                <button class="btn btn-light"><i class="far fa-thumbs-down"></i></button>
+                <button class="btn btn-light" onclick="like('comment-3', true)"><i class="far fa-thumbs-up"></i></button>
+                <button class="btn btn-light" onclick="like('comment-3', false)"><i class="far fa-thumbs-down"></i></button>
             </div>
         </div>
 
@@ -62,8 +62,8 @@
                 Donec sed justo dui. Nullam ut dolor convallis, consectetur metus in, dapibus felis. In hac habitasse
                 platea dictumst. Pellentesque vel ultrices massa, nec mattis nulla. Aenean et ornare mauris.</p>
             <div class="float-right">
-                <button class="btn btn-light"><i class="far fa-thumbs-up"></i></button>
-                <button class="btn btn-light"><i class="far fa-thumbs-down"></i></button>
+                <button class="btn btn-light" onclick="like('comment-4', true)"><i class="far fa-thumbs-up"></i></button>
+                <button class="btn btn-light" onclick="like('comment-4', false)"><i class="far fa-thumbs-down"></i></button>
             </div>
         </div>
 
@@ -77,14 +77,14 @@
                 Donec sed justo dui. Nullam ut dolor convallis, consectetur metus in, dapibus felis. In hac habitasse
                 platea dictumst. Pellentesque vel ultrices massa, nec mattis nulla. Aenean et ornare mauris.</p>
             <div class="float-right">
-                <button class="btn btn-light"><i class="far fa-thumbs-up"></i></button>
-                <button class="btn btn-light"><i class="far fa-thumbs-down"></i></button>
+                <button class="btn btn-light" onclick="like('comment-5', true)"><i class="far fa-thumbs-up"></i></button>
+                <button class="btn btn-light" onclick="like('comment-5', false)"><i class="far fa-thumbs-down"></i></button>
             </div>
         </div>
     </div>
 
     <p>
-        <button id="rating" class="btn btn-primary">check ratings</button>
+        <button onclick="summary()" id="rating" class="btn btn-primary">check ratings</button>
     </p>
     <script src="main.js"></script>
 </div>
