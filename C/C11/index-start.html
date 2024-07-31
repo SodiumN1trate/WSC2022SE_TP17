@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/bootstrap.min.css">
     <script src="jquery-3.6.1.min.js"></script>
     <link rel="stylesheet" href="fontawesome-free-5.12.1-web/css/all.min.css">
+    <style>
+        .highlight {
+            background-color: #0a58ca !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -13,7 +18,7 @@
     <div class="row">
         <h1>Comments</h1>
 
-        <div class="shadow p-3 mb-5 bg-white rounded" id="comment-1">
+        <div class="shadow p-3 mb-5 bg-white rounded">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat, nibh eu varius mollis,
                 nibh sem viverra risus, in cursus erat nibh consectetur lacus. Nam blandit lectus non turpis lacinia
                 sollicitudin. Vivamus volutpat lobortis dolor in auctor. Proin auctor erat non pretium laoreet. Interdum
@@ -23,36 +28,36 @@
                 Integer tempus fermentum ultrices. Mauris rutrum enim sed neque interdum, in semper velit eleifend.
                 Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
             <div class="float-right">
-                <button class="btn btn-light" onclick="like('comment-1', true)"><i class="far fa-thumbs-up"></i></button>
-                <button class="btn btn-light" onclick="like('comment-1', false)"><i class="far fa-thumbs-down"></i></button>
+                <button class="btn btn-light thumbs-up"><i class="far fa-thumbs-up"></i></button>
+                <button class="btn btn-light thumbs-down"><i class="far fa-thumbs-down"></i></button>
             </div>
         </div>
 
-        <div class="shadow p-3 mb-5 bg-white rounded" id="comment-2">
+        <div class="shadow p-3 mb-5 bg-white rounded">
             <p>Vestibulum sollicitudin scelerisque mi, rhoncus finibus ex accumsan quis. Quisque vel mollis magna, non
                 bibendum orci. Cras nec purus et massa tempor porttitor. Maecenas sem erat, placerat sed neque eget,
                 pulvinar molestie enim. Sed arcu urna, consequat ac tellus facilisis, porttitor rutrum enim. Nunc a
                 mauris porta, gravida nulla vitae, sollicitudin lorem. Curabitur sed vestibulum lectus. In eu ipsum
                 purus.</p>
             <div class="float-right">
-                <button class="btn btn-light" onclick="like('comment-2', true)"><i class="far fa-thumbs-up"></i></button>
-                <button class="btn btn-light" onclick="like('comment-2', false)"><i class="far fa-thumbs-down"></i></button>
+                <button class="btn btn-light thumbs-up"><i class="far fa-thumbs-up"></i></button>
+                <button class="btn btn-light thumbs-down"><i class="far fa-thumbs-down"></i></button>
             </div>
         </div>
 
-        <div class="shadow p-3 mb-5 bg-white rounded" id="comment-3">
+        <div class="shadow p-3 mb-5 bg-white rounded">
             <p>Maecenas elementum porta lorem in vestibulum. Mauris tincidunt ac odio imperdiet malesuada. Cras eget
                 congue lorem, ac commodo sapien. Nullam ultricies velit sit amet venenatis luctus. Ut metus dolor,
                 elementum eu aliquam pretium, cursus eget metus. Nunc purus quam, blandit et arcu sit amet, suscipit
                 finibus nunc. Praesent convallis, eros non posuere aliquet, leo risus facilisis turpis, et pretium erat
                 nibh quis sapien. Vestibulum erat magna, commodo vitae bibendum quis, ornare id lorem.</p>
             <div class="float-right">
-                <button class="btn btn-light" onclick="like('comment-3', true)"><i class="far fa-thumbs-up"></i></button>
-                <button class="btn btn-light" onclick="like('comment-3', false)"><i class="far fa-thumbs-down"></i></button>
+                <button class="btn btn-light thumbs-up"><i class="far fa-thumbs-up"></i></button>
+                <button class="btn btn-light thumbs-down"><i class="far fa-thumbs-down"></i></button>
             </div>
         </div>
 
-        <div class="shadow p-3 mb-5 bg-white rounded" id="comment-4">
+        <div class="shadow p-3 mb-5 bg-white rounded">
             <p>Donec aliquam fringilla ipsum quis accumsan. Sed consequat, justo quis vehicula faucibus, felis libero
                 feugiat odio, at fringilla leo est id metus. In euismod orci libero, vitae aliquet urna gravida
                 volutpat. Ut a urna velit. Quisque non elit maximus, ultrices nibh sed, facilisis risus. Nulla at
@@ -62,12 +67,12 @@
                 Donec sed justo dui. Nullam ut dolor convallis, consectetur metus in, dapibus felis. In hac habitasse
                 platea dictumst. Pellentesque vel ultrices massa, nec mattis nulla. Aenean et ornare mauris.</p>
             <div class="float-right">
-                <button class="btn btn-light" onclick="like('comment-4', true)"><i class="far fa-thumbs-up"></i></button>
-                <button class="btn btn-light" onclick="like('comment-4', false)"><i class="far fa-thumbs-down"></i></button>
+                <button class="btn btn-light thumbs-up"><i class="far fa-thumbs-up"></i></button>
+                <button class="btn btn-light thumbs-down"><i class="far fa-thumbs-down"></i></button>
             </div>
         </div>
 
-        <div class="shadow p-3 mb-5 bg-white rounded" id="comment-5">
+        <div class="shadow p-3 mb-5 bg-white rounded">
             <p>Donec aliquam fringilla ipsum quis accumsan. Sed consequat, justo quis vehicula faucibus, felis libero
                 feugiat odio, at fringilla leo est id metus. In euismod orci libero, vitae aliquet urna gravida
                 volutpat. Ut a urna velit. Quisque non elit maximus, ultrices nibh sed, facilisis risus. Nulla at
@@ -77,8 +82,8 @@
                 Donec sed justo dui. Nullam ut dolor convallis, consectetur metus in, dapibus felis. In hac habitasse
                 platea dictumst. Pellentesque vel ultrices massa, nec mattis nulla. Aenean et ornare mauris.</p>
             <div class="float-right">
-                <button class="btn btn-light" onclick="like('comment-5', true)"><i class="far fa-thumbs-up"></i></button>
-                <button class="btn btn-light" onclick="like('comment-5', false)"><i class="far fa-thumbs-down"></i></button>
+                <button class="btn btn-light thumbs-up"><i class="far fa-thumbs-up"></i></button>
+                <button class="btn btn-light thumbs-down"><i class="far fa-thumbs-down"></i></button>
             </div>
         </div>
     </div>
