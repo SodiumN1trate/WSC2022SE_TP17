@@ -32,9 +32,9 @@ const checkForLinks = (row) => {
 const checkForImageLinks = (row) => {
     if (row.match(/!\[[^\]]+\]\(http[^\s)]+\)/g)) {
         let regName = new RegExp(/!\[(.*?)\]\(http[^\s)]+\)/, 'g')
-        let regLing = new RegExp(/!\[[^\]]+\]\((http[^\s)]+)\)/, 'g')
+        let regLink = new RegExp(/!\[[^\]]+\]\((http[^\s)]+)\)/, 'g')
         let name = regName.exec(row)[1]
-        let link = regLing.exec(row)[1]
+        let link = regLink.exec(row)[1]
         row = row.replace(`![${name}](${link})`, `<img src="${link}" width="200px" alt="${name}">`)
         if (row.match(/\[[^\]]+\]\(http[^\s)]+\)/g)) {
             return checkForLinks(row)
@@ -52,8 +52,8 @@ textarea.addEventListener('input', () => {
             resultContainer.innerHTML += `<h${header}>${row}</h${header}>\n`
         } else if (row === '---') {
             resultContainer.innerHTML += `<hr>\n`
-        }  else if (row[0] === '-' && row[1] === '-') {
-            row = row.replace('--', '')
+        }  else if (row[0] === '-') {
+            row = row.replace('-', '')
             resultContainer.innerHTML += `<li>${row}</li>\n`
         }  else if (row[0] === '-' && row[1] === '-') {
             row = row.replace('--', '')

@@ -2,12 +2,15 @@
 Your Code
  */
 
+body {
+    font-family: Arial, serif;
+}
+
 .photos {
     counter-set: counter123 -1;
 }
 
 .photos > .photo-item:nth-child(n + 9) {
-    border: 1px solid red;
     counter-increment: counter123 1;
     position: absolute;
     opacity: 0;
@@ -33,7 +36,6 @@ Your Code
 }
 
 .photos > .photo-item:nth-child(-n + 9):after {
-    border: 1px solid red;
     content: '';
     background-color: unset;
 }

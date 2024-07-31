@@ -2,7 +2,6 @@ const buttons = document.querySelectorAll('.btn')
 
 let comments = []
 
-
 const like = (commentId, liked) => {
     let removeHighlight = false
     let commentContainer = document.getElementById(commentId)

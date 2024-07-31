@@ -1,9 +1,88 @@
+
+@keyframes changeOrder {
+    from {
+        z-index: 6;
+    }
+    to {
+        z-index: 1;
+    }
+}
+
+label {
+    opacity: 0;
+    animation: changeOrder 3s infinite linear;
+    cursor: pointer;
+    left: 1rem;
+    padding: 1rem;
+    position: absolute;
+    top: 1rem;
+    user-select: none;
+    width: 100vw;
+    height: 100vh;
+}
+
+input {
+    opacity: 0;
+}
+
+label:nth-of-type(1) { animation-delay: 0s; }
+label:nth-of-type(2) { animation-delay: -0.5s; }
+label:nth-of-type(3) { animation-delay: -1.0s; }
+label:nth-of-type(4) { animation-delay: -1.5s; }
+label:nth-of-type(5) { animation-delay: -2.0s; }
+label:nth-of-type(6) { animation-delay: -2.5s; }
+
+#d1:checked ~ span::before { content: "1"; }
+#d2:checked ~ span::before { content: "2"; }
+#d3:checked ~ span::before { content: "3"; }
+#d4:checked ~ span::before { content: "4"; }
+#d5:checked ~ span::before { content: "5"; }
+#d6:checked ~ span::before { content: "6"; }
+
+
+#d1:checked ~ #cube {
+    animation: mix 2s linear;
+    transform: rotate3d(1, 0, 0, 0deg);
+}
+
+#d2:checked ~ #cube {
+    animation: mix 2s linear;
+    transform: rotate3d(1, 0, 0, -90deg);
+}
+
+#d3:checked ~ #cube {
+    animation: mix 2s linear;
+    transform: rotate3d(0, 1, 0, 90deg);
+}
+
+#d4:checked ~ #cube {
+    animation: mix 2s linear;
+    transform: rotate3d(0, 1, 0, -90deg);
+}
+
+#d5:checked ~ #cube {
+    animation: mix 2s linear;
+    transform: rotate3d(1, 0, 0, 90deg);
+}
+
+#d6:checked ~ #cube {
+    animation: mix 2s linear;
+    transform: rotate3d(1, 0, 0, 180deg);
+}
+
+span {
+    width: 100px;
+    height: 200px;
+    position: relative;
+}
+
 #cube {
     margin: 50px;
     width: 100px;
     height: 100px;
     transform-style: preserve-3d;
-    animation: rotate 3s infinite;
+    transition: 1s all;
+    /*animation: rotate 3s infinite;*/
 }
 
 .face {
@@ -70,12 +149,8 @@
     background-position-y: -200px;
 }
 
-@keyframes rotate {
-    0%   { transform: rotate3d(1, 1, 1, 0deg); }
-    16%  { transform: rotate3d(1, 1, 1, 90deg); }
-    33%  { transform: rotate3d(1, 1, 1, 180deg); }
-    50%  { transform: rotate3d(1, 1, 1, 270deg); }
-    66%  { transform: rotate3d(1, 1, 1, 360deg); }
-    83%  { transform: rotate3d(1, 1, 1, 450deg); }
-    100% { transform: rotate3d(1, 1, 1, 540deg); }
+@keyframes mix {
+    0%   { transform: rotate3d(1, 0, 0, 90deg); }
+    50%  { transform: rotate3d(0, 1, 0, 90deg); }
+    100% { transform: rotate3d(0, 0, 1, 90deg); }
 }

@@ -1,19 +1,16 @@
-const wrap = document.getElementById('wrap')
-const textContainer = document.getElementById('txt')
-let text = textContainer.innerHTML
 
+let text = document.getElementById('txt').innerHTML
 const resize = () => {
+    const wrap = document.getElementById('wrap')
+    const textContainer = document.getElementById('txt')
     if(textContainer.offsetWidth < wrap.offsetWidth) {
-        console.log(123)
         textContainer.innerHTML = text
         return 0
     }
     let charsToDelete = Math.round((textContainer.offsetWidth - wrap.offsetWidth) / 10) * 2
-    if (charsToDelete % 2 === 1) {
-        charsToDelete += 1
+    if(textContainer.offsetWidth - wrap.offsetWidth <= 100) {
+        charsToDelete = Math.round((textContainer.offsetWidth - wrap.offsetWidth) / 2) * 2
     }
-    if(wrap.offsetWidth < textContainer.offsetWidth) {
-        textContainer.innerHTML = text.slice(0, (text.length / 2) - (charsToDelete / 2)) + '...' + text.slice((text.length / 2) + (charsToDelete / 2), text.length)
-    }
+    textContainer.innerHTML = text.slice(0, (text.length / 2) - (charsToDelete / 2)) + '...' + text.slice((text.length / 2) + (charsToDelete / 2), text.length)
 }
 new ResizeObserver(resize).observe(wrap)

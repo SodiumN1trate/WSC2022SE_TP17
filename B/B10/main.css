@@ -1,17 +1,16 @@
 .stars {
-    mask-image: url("stars.png");
-    width: 750px;
+    background-image: url("stars.png");
+    width: 750px !important;;
     height: 150px;
+    display: flex;
 }
 
 .mask {
-    background-image: url("Untitled.png");
-    width: 750px;
+    mask: url("stars.png") center no-repeat, linear-gradient(#0066ff 0 0);
+    mask-composite: exclude;
+    width: 750px !important;
     height: 150px;
-}
-
-.stars {
-    display: flex;
+    position: absolute;
 }
 
 .stars > div {
@@ -19,5 +18,5 @@
 }
 
 .stars > div:hover {
-    background-color: gold;
+    background-color: black;
 }
