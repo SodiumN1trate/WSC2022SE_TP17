@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+
+    </div>
+    <script>
+        let page = 1;
+        const getData = (page) => {
+            fetch(`../server-side?page=${page}`).then((response) => response.json())
+                .then((data) => {
+                    data.forEach((row) => {
+                        document.getElementById('container').innerHTML += `
+                            <h1>${row.first_name} ${row.last_name} - ${row.country} (${row.city})</h1>
+                            <p>${row.email} - ${row.phone}</p>
+                        `
+                    })
+                })
+        }
+
+        window.addEventListener('scroll', (e) => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                page += 1
+                getData(page)
+            }
+        })
+
+        getData(page)
+    </script>
+</body>
+</html>
