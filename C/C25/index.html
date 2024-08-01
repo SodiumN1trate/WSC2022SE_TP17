@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div id="cursor"></div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
+
+<style>
+    body {
+        overflow: hidden;
+    }
+    .container {
+        width: 100vw;
+        height: 100vh;
+        cursor: none !important;
+    }
+
+    #cursor {
+        width: 0;
+        height: 0;
+        border-left: transparent solid 20px;
+        border-right: transparent solid 20px;
+        border-bottom: black solid 40px;
+        transform: rotate(-45deg);
+        position: absolute;
+    }
+
+    .ripple {
+        width: 10px;
+        height: 10px;
+        background-color: #dcdcdc;
+        position: absolute;
+        animation: anim 1s linear;
+        border-radius: 50%;
+        z-index: -10;
+    }
+
+    @keyframes anim {
+        from {
+            opacity: 1;
+            transform: scale(0);
+        }
+        to {
+            opacity: 0;
+            transform: scale(50);
+            display: none;
+        }
+    }
+</style>
