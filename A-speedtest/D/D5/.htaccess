@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^/D5/(.*\.(jpg|png))$ watermark.php

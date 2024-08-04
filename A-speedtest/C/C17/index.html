@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="button">Click me</div>
+    <script src="main.js"></script>
+</body>
+</html>
+
+<style>
+    #button {
+        width: 300px;
+        height: 200px;
+        background-color: white;
+        outline: none;
+        border: 1px solid black;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .ripple {
+        position: absolute;
+        animation: 1s ripple ease-in;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #cfcfcf;
+    }
+
+    @keyframes ripple {
+        from {
+            opacity: 1;
+            transform: scale(0);
+        }
+        to {
+            opacity: 0;
+            transform: scale(100);
+            background-color: transparent;
+        }
+
+    }
+</style>

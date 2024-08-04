@@ -1,0 +1,22 @@
+.stars {
+    background-image: url("stars.png");
+    width: 750px !important;;
+    height: 150px;
+    display: flex;
+}
+
+.mask {
+    mask: url("stars.png") center no-repeat, linear-gradient(#0066ff 0 0);
+    mask-composite: exclude;
+    width: 750px !important;
+    height: 150px;
+    background-color: red;
+}
+
+.stars > div {
+    width: 75px;
+}
+
+.stars > div:hover {
+    background-color: black;
+}

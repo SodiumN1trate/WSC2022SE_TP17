@@ -1,0 +1,51 @@
+.star {
+    width: 0;
+    height: 0;
+    border-left: 16px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 35px solid gold;
+    position: relative;
+    margin-inline: auto;
+}
+
+.rotate {
+    width: 100px;
+    height: 100px;
+    transform-origin: center;
+    animation: rotate 1.5s linear forwards infinite;
+}
+
+.star:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 38px solid gold;
+    position: absolute;
+    left: -47px;
+    top: 30px;
+    transform: rotate(38deg);
+}
+
+.star:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 38px solid gold;
+    position: absolute;
+    left: -56px;
+    top: 30px;
+    transform: rotate(323deg);
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
