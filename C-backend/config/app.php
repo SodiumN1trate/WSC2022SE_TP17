@@ -212,4 +212,10 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'reasons' => [
+        'You have been blocked by an administrator',
+        'You have been blocked for spamming',
+        'You have been blocked for cheating',
+    ]
+
 ];

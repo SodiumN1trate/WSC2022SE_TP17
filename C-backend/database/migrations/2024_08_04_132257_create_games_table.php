@@ -17,6 +17,8 @@ return new class extends Migration
             $table->text('description');
             $table->string('thumbnail')->nullable();
             $table->string('slug');
+            $table->boolean('is_deleted')->default(false);
+            $table->foreignId('author_id')->constrained('users');
             $table->timestamps();
         });
     }
