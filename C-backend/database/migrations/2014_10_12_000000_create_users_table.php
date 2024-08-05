@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('username');
             $table->dateTime('last_login_at')->nullable();
-            $table->string('password');
+            $table->text('password');
             $table->integer('block_reason')->nullable();
             $table->rememberToken();
             $table->timestamps();

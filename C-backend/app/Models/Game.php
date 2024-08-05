@@ -9,7 +9,6 @@ class Game extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'title',
         'is_deleted',
@@ -17,6 +16,7 @@ class Game extends Model
         'thumbnail',
         'slug',
         'author_id',
+        'gamePath',
     ];
 
     public function author()

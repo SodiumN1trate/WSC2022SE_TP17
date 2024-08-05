@@ -30,7 +30,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 
@@ -41,10 +40,16 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
 
     public function scores()
     {
         return $this->hasMany(GameScore::class);
+    }
+
+    public function games()
+    {
+        return $this->hasMany(Game::class, 'author_id');
     }
 }

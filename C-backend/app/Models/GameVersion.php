@@ -12,6 +12,7 @@ class GameVersion extends Model
     protected $fillable = [
         'game_id',
         'path',
+        'version_number',
     ];
 
     public function scores()

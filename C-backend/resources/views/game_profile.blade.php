@@ -2,7 +2,7 @@
 @section('content')
     <h1>User profile</h1>
     <hr>
-{{--    <img src="{{config('app.url')}}/storage{{ $game->versions[0]->path }}/thumbnail.png" width="400">--}}
+    <img src="{{config('app.url')}}/storage{{ $game->versions[0]->path }}/thumbnail.png" width="400">
     <h2>Title: {{ $game->title }}</h2>
     <p>Description: {{ $game->description }}</p>
 

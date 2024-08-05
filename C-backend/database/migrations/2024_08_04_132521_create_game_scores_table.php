@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('game_scores', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('game_version_id')->constrained('game_versions');
+            $table->foreignId('game_version_id')->constrained('game_versions')->cascadeOnDelete();
             $table->integer('score');
             $table->timestamps();
         });

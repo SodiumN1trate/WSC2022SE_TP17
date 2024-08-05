@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
         $game2 = Game::create([
             'title' => 'Demo Game 2',
             'slug' => 'demo-game-2',
-            'thumbnail' => '/2/thumbnail.png',
+            'thumbnail' => null,
             'description' => 'This is demo game 2',
             'author_id' => $dev2->id,
         ]);
@@ -71,16 +71,19 @@ class DatabaseSeeder extends Seeder
         $g1v1 = GameVersion::create([
             'game_id' => $game1->id,
             'path' => '/1/v1',
+            'version_number' => '1'
         ]);
 
         $g1v2 = GameVersion::create([
             'game_id' => $game1->id,
             'path' => '/1/v2',
+            'version_number' => '2'
         ]);
 
         $g2v1 = GameVersion::create([
             'game_id' => $game2->id,
             'path' => '/2/v1',
+            'version_number' => '1'
         ]);
 
         // Add game score
