@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\GameResource;
 use App\Models\Game;
+use App\Models\GameScore;
+use App\Models\GameVersion;
 use Illuminate\Http\Request;
+use Laravel\Sanctum\PersonalAccessToken;
+use ZipArchive;
 
 class GameController extends Controller
 {
@@ -25,6 +29,12 @@ class GameController extends Controller
                 ->join('game_scores', 'game_versions.id', '=', 'game_scores.game_version_id')
                 ->groupBy('games.id')
                 ->orderByRaw('COUNT(game_scores.id) ' . $sortDir)
+                ->paginate($size);
+        }  else if($sortBy === 'uploaddate') {
+            $pagination = Game::select('games.*')
+                ->join('game_versions', 'games.id', '=', 'game_versions.game_id')
+                ->groupBy('games.id')
+                ->orderByRaw('MAX(game_versions.id) ' . $sortDir)
                 ->paginate($size);
         } else {
             $pagination = Game::orderBy('title', $sortDir)->paginate($size);
@@ -74,6 +84,12 @@ class GameController extends Controller
     public function show($slug)
     {
         $game = Game::where('slug', $slug)->first();
+        if(!isset($game)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'This game does not exist',
+            ], 404);
+        }
         $scoreCount = $game->versions()->get()->map(function ($version) {
             return $version->scores()->count();
         })->toArray();
@@ -102,6 +118,12 @@ class GameController extends Controller
         ]);
 
         $game = Game::where('slug', $slug)->first();
+        if(!isset($game)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'This game does not exist',
+            ], 404);
+        }
         $game->update($validated);
 
         return response()->json([
@@ -117,10 +139,160 @@ class GameController extends Controller
     public function delete($slug)
     {
         $game = Game::where('slug', $slug)->first();
+        if(!isset($game)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'This game does not exist',
+            ], 404);
+        }
         $game->delete();
 
         return response()->json([
             'status' => 'success',
         ], 204);
+    }
+
+    /*
+     * Upload game version
+     *
+     */
+    public function uploadVersion(Request $request, $slug)
+    {
+        $validated = $request->validate([
+            'token' => 'required',
+            'zipfile' => 'required',
+        ]);
+        $game = Game::where('slug', $slug)->first();
+        if(!isset($game)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'This game does not exist',
+            ], 404);
+        }
+
+        $token = PersonalAccessToken::findToken($validated['token'])->latest()->first();
+        $user = $token->tokenable;
+        if($game->author_id !== $user->id) {
+            return response()->json([
+                'status' => 'forbidden',
+                'message' => 'You are not the game author',
+            ], 403);
+        }
+
+        $zip = new ZipArchive();
+        if($zip->open($validated['zipfile'])) {
+            if($zip->getFromName('index.html')) {
+                $version = $game->versions()->latest()->first()->number + 1;
+                $path = '/games/' . $game->slug . '/' . $version . '/';
+                if($zip->extractTo(storage_path() . '/app/public' . $path)) {
+                    GameVersion::create([
+                        'game_id' => $game->id,
+                        'number' => $version,
+                        'path' => $path,
+                        'version' => now(),
+                    ]);
+                    if($zip->getFromName('thumbnail.png')) {
+                        $game->thumbnail = $path . 'thumbnail.png';
+                    } else {
+                        $game->thumbnail = null;
+                    }
+                    $game->save();
+
+                    return response()->json([
+                        'status' => 'success',
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'There was extraction error',
+                    ], 400);
+                }
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'There is no index.html file in archive',
+                ], 400);
+            }
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'There was an error',
+        ], 400);
+    }
+
+    /*
+     * Serve game files
+     *
+     */
+    public function serveGameFiles($slug, $version)
+    {
+        $game = Game::where('slug', $slug)->first();
+        if(!isset($game)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'This game does not exist',
+            ], 404);
+        }
+        return response()->json([
+            'url' => config('app.url') . '/storage' . $game->versions()->where('number', $version)->first()->path,
+        ]);
+    }
+
+    /*
+     * Return high scores
+     *
+     */
+    public function getHighscores($slug)
+    {
+        $game = Game::where('slug', $slug)->first();
+        if(!isset($game)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'This game does not exist',
+            ], 404);
+        }
+
+        $scores = $game->versions()->get()->map(function ($version) {
+            return $version->scores()->orderBy('score', 'desc')->get()->map(function($score) {
+                return [
+                    'username' => $score->user->username,
+                    'score' => $score->score,
+                    'timestamp' => $score->created_at,
+                ];
+            });
+
+        })->filter();
+        return response()->json([
+            'scores' => $scores,
+        ]);
+    }
+
+    /*
+     * When a user ends a game run, the score can be posted to this endpoint.
+     *
+     */
+    public function saveScore(Request $request, $slug)
+    {
+        $validated = $request->validate([
+            'score' => 'required|integer',
+        ]);
+
+        $game = Game::where('slug', $slug)->first();
+        if(!isset($game)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'This game does not exist',
+            ], 404);
+        }
+
+        GameScore::create([
+            'score' => $validated['score'],
+            'game_version_id' => $game->versions()->latest()->first()->id,
+            'user_id' => auth()->user()->id,
+        ]);
+
+        return response()->json([
+           'status' => 'success',
+        ]);
     }
 }

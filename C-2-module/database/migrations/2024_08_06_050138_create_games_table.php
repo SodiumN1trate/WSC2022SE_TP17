@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('thumbnail')->nullable();
             $table->string('description');
+            $table->string('gamePath');
             $table->softDeletes();
             $table->foreignId('author_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();

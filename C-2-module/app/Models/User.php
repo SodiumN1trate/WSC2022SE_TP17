@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(GameScore::class);
     }
+
+    public function games()
+    {
+        return $this->hasMany(Game::class, 'author_id');
+    }
 }

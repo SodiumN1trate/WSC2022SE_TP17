@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\GameController;
+use App\Http\Controllers\Api\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,6 +27,9 @@ Route::get('/games', [GameController::class, 'index']);
 
 Route::get('/games/{slug}', [GameController::class, 'show']);
 
+
+Route::post('/games/{slug}/upload', [GameController::class, 'uploadVersion']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/signout', [AuthController::class, 'signout']);
 
@@ -35,4 +39,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/games/{slug}', [GameController::class, 'update']);
         Route::delete('/games/{slug}', [GameController::class, 'delete']);
     });
+
+    Route::get('/games/{slug}/{version}', [GameController::class, 'serveGameFiles']);
+    Route::get('/users/{username}', [UserController::class, 'show']);
+
+    Route::get('/games1/{slug}/scores', [GameController::class, 'getHighscores']);
+    Route::post('/games1/{slug}/scores', [GameController::class, 'saveScore']);
+
 });

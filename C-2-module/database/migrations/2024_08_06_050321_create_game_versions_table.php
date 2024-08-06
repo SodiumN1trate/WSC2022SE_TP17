@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('game_id')->constrained('games')->cascadeOnDelete();
             $table->dateTime('version');
             $table->string('path');
+            $table->integer('number');
             $table->timestamps();
         });
     }

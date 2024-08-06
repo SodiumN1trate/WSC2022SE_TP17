@@ -13,6 +13,7 @@ class GameVersion extends Model
         'game_id',
         'version',
         'path',
+        'number',
     ];
 
     public function scores()

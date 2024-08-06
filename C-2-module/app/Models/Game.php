@@ -16,6 +16,7 @@ class Game extends Model
         'thumbnail',
         'description',
         'author_id',
+        'gamePath',
     ];
 
     public function author()
@@ -27,4 +28,5 @@ class Game extends Model
     {
         return $this->hasMany(GameVersion::class, 'game_id');
     }
+
 }
