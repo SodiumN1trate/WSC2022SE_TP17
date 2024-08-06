@@ -30,7 +30,7 @@ Route::get('/games/{slug}', [GameController::class, 'show']);
 
 Route::post('/games/{slug}/upload', [GameController::class, 'uploadVersion']);
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['isbanned', 'auth:sanctum'])->group(function () {
     Route::post('/auth/signout', [AuthController::class, 'signout']);
 
     Route::post('/games', [GameController::class, 'create']);

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\IsBanned;
 use App\Http\Middleware\IsDeveloper;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -66,5 +67,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isdev' => IsDeveloper::class,
+        'isbanned' => IsBanned::class,
     ];
 }
