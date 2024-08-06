@@ -30,6 +30,5 @@ class AdminAuthController extends Controller
         } else {
             dd('nope');
         }
-
     }
 }

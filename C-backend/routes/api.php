@@ -20,12 +20,12 @@ use App\Http\Controllers\Api\UserController;
 // Auth
 Route::post('/auth/signup', [AuthController::class, 'signUp']);
 Route::post('/auth/signin', [AuthController::class, 'signIn']);
+Route::get('/games', [GameController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/signout', [AuthController::class, 'signOut']);
 
     // Game crud
-    Route::get('/games', [GameController::class, 'index']);
     Route::post('/games', [GameController::class, 'create']);
     Route::get('/games/{slug}', [GameController::class, 'show']);
     Route::post('/games/{slug}/upload', [GameController::class, 'upload']);

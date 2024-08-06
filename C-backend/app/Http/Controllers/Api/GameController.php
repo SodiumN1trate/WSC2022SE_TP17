@@ -18,11 +18,6 @@ class GameController extends Controller
      */
     public function index(Request $request)
     {
-        $sorts = [
-            'title' => 'title',
-            'uploaddate' => 'created_at',
-        ];
-
         if($request->sortBy === 'popular') {
             $pagination = Game::select('games.*', 'COUNT(game_scores.id) as scoreCount')
                 ->join('game_versions', 'games.id', '=', 'game_versions.id')
@@ -31,16 +26,18 @@ class GameController extends Controller
                 ->orderBy('scoreCount',  isset($request->sortDir) ? $request->sortDir : 'ASC')
                 ->paginate(isset($request->size) ? $request->size : 10);
         } else if ($request->sortBy === 'uploaddate') {
-            $pagination = Game::select('games.*', 'MAX(game_versions.created_at) as latest')
-                ->join('game_versions', 'games.id', '=', 'game_versions.id')
+            $pagination = Game::select('games.*')
+                ->join('game_versions', 'games.id', '=', 'game_versions.game_id')
                 ->groupBy('games.id')
-                ->orderByRaw('latest ' . isset($request->sortDir) ? $request->sortDir : 'ASC')
+                ->orderByRaw('MAX(game_versions.created_at) ' . isset($request->sortDir) ? $request->sortDir : 'ASC')
                 ->paginate(isset($request->size) ? $request->size : 10);
         } else {
             $pagination = Game::orderBy('title',  isset($request->sortDir) ? $request->sortDir : 'ASC')->paginate(isset($request->size) ? $request->size : 10);
         }
 
-        return $pagination;
+        return response()->json([
+            'content' => GameResource::collection($pagination->items()),
+        ]);
     }
 
     /*
@@ -95,12 +92,15 @@ class GameController extends Controller
         $validated = $request->validate([
             'zipfile' => 'required'
         ]);
-        try {
+
+        $folderName = explode('.', $validated['zipfile']->getClientOriginalName())[0];
+
+//        try {
+
             $zip = new ZipArchive();
             if($zip->open($validated['zipfile'])) {
-                if($zip->extractTo(storage_path() . '/app/public/')) {
-                    $folderName = explode('.', $validated['zipfile']->getClientOriginalName())[0];
-                    $versionsDirectories = Storage::disk('local')->directories('/public/' . $folderName);
+                if($zip->extractTo(storage_path() . '/app/public'. $game->gamePath . '/' . $folderName)) {
+                    $versionsDirectories = Storage::disk('local')->directories('/public/' . $game->gamePath . '/' . $folderName);
                     $versions = [];
                     foreach ($versionsDirectories as $directory) {
                         $versionDirectory = explode('/', $directory)[2];
@@ -112,7 +112,7 @@ class GameController extends Controller
                     $latestVersion = $versions[count($versions) - 1];
                     GameVersion::create([
                         'game_id' => $game->id,
-                        'path' => '/' . $folderName . '/',
+                        'path' => '/' . $folderName,
                         'version_number' => $latestVersion['version']
                     ]);
                     $game->update([
@@ -120,12 +120,12 @@ class GameController extends Controller
                     ]);
                 }
             }
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'invalid',
-                'message' => 'There was an error',
-            ], 400);
-        }
+//        } catch (\Exception $e) {
+//            return response()->json([
+//                'status' => 'invalid',
+//                'message' => 'There was an error',
+//            ], 400);
+//        }
         return response()->json([
             'status' => 'success',
             'message' => 'New version uploaded successfully!',

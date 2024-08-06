@@ -21,7 +21,7 @@ class GameResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'thumbnail' => $this->thumbnail,
+            'thumbnail' => $this->gamePath . $this->versions[count($this->versions) - 1]->path . '/thumbanail.png',
             'uploadTimestamp' => $this->created_at,
             'author' => $this->author->username,
             'scoreCount' => array_sum($scoreCount),
