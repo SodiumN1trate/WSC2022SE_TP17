@@ -1,6 +1,7 @@
 <template>
   <main class="mt-5" v-if="data">
     <h1>{{ data.username }}</h1>
+<!--    Authored games -->
     <div v-if="data?.authoredGames" class="mt-5">
       <h3 class="p-0 m-0">Authored Games</h3>
       <div class="d-flex flex-column gap-3">
@@ -8,6 +9,7 @@
       </div>
     </div>
     <div class="mt-5">
+    <!--   Highscores container   -->
       <h3 class="p-0 m-0">Highscores per Game</h3>
       <div class="d-flex flex-column mt-3">
         <div class="d-flex justify-content-between" style="width: 300px" v-for="(score, index) in data.highscores" :key="index">

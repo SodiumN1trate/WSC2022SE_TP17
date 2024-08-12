@@ -51,7 +51,7 @@ export default {
       fetch(url + `/games/${this.$route.params.slug}/scores`).then(async (response) => {
         const data = await response.json()
         if(response.ok) {
-          this.leaderBoard = data.scores
+          this.leaderBoard = data.scores.slice(0, 10)
         }
       })
     }

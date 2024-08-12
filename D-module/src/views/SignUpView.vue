@@ -1,6 +1,7 @@
 <template>
   <main class="mt-5">
     <h2>Sign Up</h2>
+    <!-- Form -->
     <form class="border p-5" @submit.prevent="submit">
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>

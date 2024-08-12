@@ -1,6 +1,7 @@
 <template>
   <main class="mt-5">
     <h2>Sign In</h2>
+    <!-- Form -->
     <form class="border p-5 d-flex justify-content-center align-items-center">
       <b>You have been successfully signed out.</b>
     </form>
