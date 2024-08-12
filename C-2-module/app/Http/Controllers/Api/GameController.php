@@ -252,16 +252,15 @@ class GameController extends Controller
             ], 404);
         }
 
-        $scores = $game->versions()->get()->map(function ($version) {
-            return $version->scores()->orderBy('score', 'desc')->get()->map(function($score) {
+        $version = $game->versions()->latest()->first();
+
+        $scores = $version->scores()->orderBy('score', 'desc')->get()->map(function($score) {
                 return [
                     'username' => $score->user->username,
                     'score' => $score->score,
                     'timestamp' => $score->created_at,
                 ];
             });
-
-        })->filter();
         return response()->json([
             'scores' => $scores,
         ]);

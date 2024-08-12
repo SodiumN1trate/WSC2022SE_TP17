@@ -9,7 +9,7 @@
         <div class="card-body">
           <div class="card-title d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center gap-2">
-              <h5 class="p-0 m-0">{{ game.title }}</h5>
+              <p class="p-0 m-0 h5">{{ game.title }}</p>
               <span>by {{ game.author }}</span>
             </div>
             <p class="p-0 m-0"># scores submitted: {{ game.scoreCount }}</p>

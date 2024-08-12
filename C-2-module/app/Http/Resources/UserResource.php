@@ -43,7 +43,16 @@ class UserResource extends JsonResource
                             'created_at' => $version->created_at,
                         ];
                     }
-                })
+                })->filter(),
         ];
     }
 }
+
+// Save
+//Carbon::macro('formatWithThreeMilliseconds', function () {
+//    return $this->format('Y-m-d\TH:i:s.000\Z');
+//});
+//
+//$time = Carbon::now();
+//
+//$formattedTime = $time->formatWithThreeMilliseconds();

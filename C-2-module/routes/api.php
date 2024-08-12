@@ -29,6 +29,7 @@ Route::get('/games/{slug}', [GameController::class, 'show']);
 
 
 Route::post('/games/{slug}/upload', [GameController::class, 'uploadVersion']);
+Route::get('/games/{slug}/scores', [GameController::class, 'getHighscores']);
 
 Route::middleware(['isbanned', 'auth:sanctum'])->group(function () {
     Route::post('/auth/signout', [AuthController::class, 'signout']);
@@ -43,7 +44,5 @@ Route::middleware(['isbanned', 'auth:sanctum'])->group(function () {
     Route::get('/games/{slug}/{version}', [GameController::class, 'serveGameFiles']);
     Route::get('/users/{username}', [UserController::class, 'show']);
 
-    Route::get('/games1/{slug}/scores', [GameController::class, 'getHighscores']);
-    Route::post('/games1/{slug}/scores', [GameController::class, 'saveScore']);
-
+    Route::post('/games/{slug}/scores', [GameController::class, 'saveScore']);
 });
