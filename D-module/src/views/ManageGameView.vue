@@ -94,11 +94,14 @@ export default {
       this.file = e.target.files[0]
     },
     uploadNewVersion () {
+      const fd = new FormData();
+      fd.append('file', this.file)
       fetch(url + `/games/${this.$route.params.slug}/upload`,{
         method: 'POST',
-        body: this.file,
+        body: fd,
         headers: {
           'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data',
           'Authorization': 'Bearer ' + localStorage.getItem('token')
         }
       }).then((response) => {

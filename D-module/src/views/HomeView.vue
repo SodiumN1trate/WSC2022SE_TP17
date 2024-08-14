@@ -56,11 +56,17 @@ export default {
   },
   methods: {
     async getData(page, sortBy, sortDir) {
-      await fetch(url + `/games?sortBy=${sortBy}&sortDir=${sortDir}&page=${page}`).then((response) => response.json())
-          .then((response) => {
-            this.total = response.totalElements
-            this.games = [...this.games, ...response.content]
-          })
+      await fetch(url + `/games?sortBy=${sortBy}&sortDir=${sortDir}&page=${page}`).then(async (response) => {
+        const data = await response.json()
+        if(response.ok) {
+          this.total = data.totalElements
+          this.games = [...this.games, ...data.content]
+          return 0
+        }
+        alert('Server error')
+      }).catch(() => {
+        alert('Server error')
+      })
     },
     saveSort() {
       localStorage.setItem('sortBy', this.sortBy)
