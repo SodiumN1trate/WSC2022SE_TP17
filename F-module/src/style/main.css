@@ -55,26 +55,38 @@ body {
 }
 
 .features-container:has( > div > .features-radio > #feature1:checked) > div > .features > .feature1 {
-    display: initial;
+    display: flex;
 }
 
 .features-container:has( > div > .features-radio > #feature2:checked) > div > .features > .feature2 {
-    display: initial;
+    display: flex;
 }
 
 .features-container:has( > div > .features-radio > #feature3:checked) > div > .features > .feature3 {
-    display: initial;
+    display: flex;
 }
 
 .features-container:has( > div > .features-radio > #feature4:checked) > div > .features > .feature4 {
-    display: initial;
+    display: flex;
 }
 
 .features > div {
     display: none;
 }
 
+.features > div > img {
+    width: 100%;
+    border-radius: 10px;
+}
+
 .feature-box {
     max-width: 800px;
     width: 100%;
+}
+
+
+.roadmap-image {
+    border-radius: 10px;
+    width: 100%;
+    max-width: 1200px;
 }
