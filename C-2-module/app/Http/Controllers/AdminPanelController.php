@@ -39,7 +39,7 @@ class AdminPanelController extends Controller
     public function userProfile($username)
     {
         return view('user_profile')->with([
-            'user' => User::where('username', $username)->first(),
+            'user' => User::where('username', $username)->firstOrFail(),
         ]);
     }
 

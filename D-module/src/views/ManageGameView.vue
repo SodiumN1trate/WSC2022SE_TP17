@@ -65,11 +65,9 @@ export default {
     fetch(url + `/games/${this.$route.params.slug}`).then(async (response) => {
       const data = await response.json()
       if(data.author !== this.username) {
-        this.$router.push('/games/' + this.$route.params.slug)
+        this.$router.push('/game/' + this.$route.params.slug)
       }
       this.form = data
-
-      console.log(response)
     })
   },
   methods: {
@@ -120,10 +118,10 @@ export default {
           const data = await response.json()
           if(response.ok) {
             alert('Success')
+            this.$router.go('/')
           }else {
             alert('There is an error')
           }
-          this.$router.go('/')
         })
       }
     }

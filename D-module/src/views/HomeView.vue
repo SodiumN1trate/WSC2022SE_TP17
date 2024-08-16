@@ -24,7 +24,7 @@
     <!--  Games discover  -->
     <div class="cards mt-5">
       <!--   Game card   -->
-      <GameCard v-for="(game, index) in games" :key="index" :game="game"></GameCard>
+      <GameCard v-for="(game, index) in games" :key="index" :game="game" :manage="false"></GameCard>
     </div>
   </main>
 </template>

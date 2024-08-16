@@ -5,7 +5,7 @@
     <div v-if="data?.authoredGames" class="mt-5">
       <h3 class="p-0 m-0">Authored Games</h3>
       <div class="d-flex flex-column gap-3">
-        <GameCard v-for="(game, index) in data.authoredGames" :key="index" :game="game"></GameCard>
+        <GameCard v-for="(game, index) in data.authoredGames" :key="index" :game="game" :manage="true"></GameCard>
       </div>
     </div>
     <div class="mt-5">

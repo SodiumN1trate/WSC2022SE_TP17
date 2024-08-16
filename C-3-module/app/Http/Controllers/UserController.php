@@ -25,7 +25,7 @@ class UserController extends Controller
     public function show($username)
     {
         return view('user_profile')->with([
-            'user' => User::where('username', $username)->first(),
+            'user' => User::where('username', $username)->firstOrFail(),
         ]);
     }
 

@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function show($username)
     {
-        $user = User::where('username', $username)->first();
+        $user = User::where('username', $username)->firstOrFail();
         if(!isset($user)) {
             return response()->json([
                 'status' => 'error',

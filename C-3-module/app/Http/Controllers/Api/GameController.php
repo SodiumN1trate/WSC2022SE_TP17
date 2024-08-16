@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\GameResource;
 use App\Models\Game;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class GameController extends Controller
 {
@@ -127,6 +128,39 @@ class GameController extends Controller
         }
         return response()->json([
             'scores' => $result,
+        ]);
+    }
+
+    /*
+     * Serve game files
+     *
+     */
+    public function serve($slug, $version)
+    {
+        $game = Game::where('slug', $slug)->firstOrFail();
+        $version = $game->versions()->where('number', $version)->firstOrFail();
+        return response()->json([
+            'url' => config('app.url') . '/storage'. $version->path,
+        ]);
+    }
+
+
+    /*
+     * Update game
+     *
+     */
+    public function update(Request $request, $slug)
+    {
+        $validated = $request->validate([
+            'title' => 'required|min:3|max:60',
+            'description' => 'required|max:200',
+        ]);
+
+        $game = Game::where('slug', $slug)->firstOrFail();
+        $game->update($validated);
+
+        return response()->json([
+            'message' => 'success',
         ]);
     }
 }

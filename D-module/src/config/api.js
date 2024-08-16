@@ -1,5 +1,5 @@
-export const url = 'http://localhost:8000/module_c_solution/api/v1'
-export const media = 'http://localhost:8000/module_c_solution'
+export const url = import.meta.env.VITE_APP_API
+export const media = import.meta.env.VITE_MEDIA_URL
 
 export const headers = {
     'Content-Type': 'application/json',

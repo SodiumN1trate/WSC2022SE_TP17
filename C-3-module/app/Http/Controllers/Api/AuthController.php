@@ -41,7 +41,7 @@ class AuthController extends Controller
             'password' => 'required|min:8|max:65536',
         ]);
 
-        $user = User::where('username', $validated['username'])->first();
+        $user = User::where('username', $validated['username'])->firstOrFail();
 
         if(Hash::check($validated['password'], $user->password)) {
             $token = $user->createToken('login')->plainTextToken;

@@ -23,6 +23,7 @@ Route::get('/games/{slug}', [GameController::class, 'show']);
 
 Route::get('/games/{slug}/scores', [GameController::class, 'scores']);
 
+Route::get('/games/{slug}/{version}', [GameController::class, 'serve']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/signout', [AuthController::class, 'signout']);
@@ -30,4 +31,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/games', [GameController::class, 'create']);
     Route::delete('/games/{slug}', [GameController::class, 'delete']);
     Route::post('/games/{slug}/scores', [UserController::class, 'savescore']);
+
+    Route::put('/games/{slug}', [GameController::class, 'update']);
 });

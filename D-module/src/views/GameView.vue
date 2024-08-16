@@ -12,7 +12,8 @@
       <div class="d-flex flex-column" style="width: 40%">
         <h3>Top 10 Leaderboard</h3>
         <div v-for="(score, index) in leaderBoard" :key="index" class="d-flex justify-content-between">
-          <span># {{ index + 1}} {{ score.username }}</span>
+          <span v-if="username && score.username === username"># <b>{{ index + 1}} {{ score.username }}</b></span>
+          <span v-else># {{ index + 1}} {{ score.username }}</span>
           <span>{{ score.score }}</span>
         </div>
       </div>
@@ -32,9 +33,11 @@ export default {
     return {
       game: null,
       leaderBoard: null,
+      username: null
     }
   },
   mounted() {
+    this.username = localStorage.getItem('username')
     fetch(url + `/games/${this.$route.params.slug}`).then(async (response) => {
       const data = await response.json()
       this.game = data

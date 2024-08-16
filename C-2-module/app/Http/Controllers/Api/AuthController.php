@@ -21,7 +21,7 @@ class AuthController extends Controller
             'password' => 'required|min:8|max:65536',
         ]);
 
-        $user = User::where('username', $validated['username'])->first();
+        $user = User::where('username', $validated['username'])->firstOrFail();
         if(isset($user) && Hash::check($validated['password'], $user->password)) {
             return response()->json([
                 'status' => 'success',
